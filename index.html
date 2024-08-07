@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thermal Printer POC</title>
+</head>
+
+<body>
+  <h3>Thermal Printer POC</h3>
+  <p>
+    Node.js <span id="node-version"></span> -
+    Chromium <span id="chrome-version"></span> -
+    Electron <span id="electron-version"></span>.
+  </p>
+  <h3>Printer Name: testprinter</h3>
+  <button id="checkPrinterStatus-button" onclick="checkPrinterStatusHandler()">Check Printer Status</button>
+  <span id="printerStatus"></span>
+  <br>
+  <button id="print-button" onclick="printHandler()">Print</button>
+  <span id="printStatus"></span>
+
+  <script>
+    const printerName = 'printer:testprinter';
+
+    const printerStatus = document.getElementById('printerStatus');
+    const printStatus = document.getElementById('printStatus');
+
+    const checkPrinterStatusHandler = async () => {
+      printerStatus.innerText = '';
+      const ipcRenderer = window.ipcRenderer;
+      const status = await ipcRenderer.invoke('checkConnectionStatus', printerName);
+      printerStatus.innerText = status ? 'Connected' : 'Disconnected';
+    }
+
+    const printHandler = async () => {
+      printStatus.innerText = '';
+      const ipcRenderer = window.ipcRenderer;
+      const status = ipcRenderer.invoke('sendPrint', printerName);
+      printStatus.innerText = status ? 'Success' : 'Failed';
+    }
+  </script>
+</body>
+
+</html>

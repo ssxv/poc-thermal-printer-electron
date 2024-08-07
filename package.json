@@ -1,0 +1,21 @@
+{
+  "name": "poc-thermal-printer-electron",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron .",
+    "rebuild": "electron-rebuild -f -w .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@thiagoelg/node-printer": "^0.6.2",
+    "electron": "^31.3.1",
+    "node-thermal-printer": "^4.4.2"
+  },
+  "volta": {
+    "node": "20.15.1"
+  }
+}
